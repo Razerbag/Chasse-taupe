@@ -1,1 +1,197 @@
+import tkinter 
+import random
+import threading
+import time
+
+
+class Facile():
+
+    def tpsrestant(): 
+        start = time.time()
+        if time.time() - start > 120:
+            findepartie()
+
+
+    def findepartie():
+        partie = 0
+        if score > bestscore1:
+            bestscore1 = score
+            pseudo1 = input()
+        fen.quit()
+        fen.destroy()
+        
+    def apparition():
+        while partie == 1:
+            time.sleep(random.randint(1, 500)/100 + 3)
+            position=random.randint(1, 9)
+            taupe(position)
+
+    def taupe(position):
+        if position == 1 and disp1 == 0:
+            disp1 = 1
+            trou1()
+        else:
+            position = position +1
+            
+            
+        if position == 2 and disp2 == 0:
+            disp2 = 1
+            trou2()
+        else:
+            position = position +1
+            
+            
+        if position == 3 and disp3 == 0:
+            disp3 = 1
+            trou3()
+        else:
+            position = position +1
+            
+            
+        if position == 4 and disp4 == 0:
+            disp4 = 1
+            trou4()
+        else:
+            position = position +1
+            
+            
+        if position == 5 and disp5 == 0:
+            disp5 = 1
+            trou5()
+        else:
+            position = position +1
+            
+            
+        if position == 6 and disp6 == 0:
+            disp6 = 1
+            trou6()
+        else:
+            position = position +1
+            
+            
+        if position == 7 and disp7 == 0:
+            disp7 = 1
+            trou7()
+        else:
+            position = position +1
+            
+            
+        if position == 8 and disp8 == 0:
+            disp8 = 1
+            trou8()
+        else:
+            position = position +1
+            
+            
+        if position == 9 and disp9 == 0:
+            disp9 = 1
+            trou9()
+        else:
+            position = position +1
+            
+    def trou1():
+        trouu1 = terre.create_image(coord, image=Taupiqueur)
+        trouu1
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou2():
+        trouu2 = terre.create_image(coord, image=Taupiqueur)
+        trouu2
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou3():
+        trouu3 = terre.create_image(coord, image=Taupiqueur)
+        trouu3
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou4():
+        trouu4 = terre.create_image(coord, image=Taupiqueur)
+        trouu4
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou5():
+        trouu5 = terre.create_image(coord, image=Taupiqueur)
+        trouu5
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou6():
+        trouu6 = terre.create_image(coord, image=Taupiqueur)
+        trouu6
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou7():
+        trouu7 = terre.create_image(coord, image=Taupiqueur)
+        trouu7
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou8():
+        trouu8 = terre.create_image(coord, image=Taupiqueur)
+        trouu8
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    def trou9():
+        trouu9 = terre.create_image(coord, image=Taupiqueur)
+        trouu9
+        time.sleep(random.randint(1, 500)/100 + 3)
+        terre.delete(trouu)
+
+    
+
+    def shoot(coord):
+        if coord.x <= taupex and coord.x >= taupex + taille de la taupe a definir and coord.y <= taupey and coord.y => taupey + taille de limage:
+#verifie si clique dans la hitbox
+            score = score + 1
+            supp la taupe
+
+    #preparation a la mise en parallèle de l'execution des fonctions
+    thread_1 = tpsrestant()
+    thread_2 = apparition()
+
+
+    Taupiqueur = Image.open("Taupe.gif")
+    shootTaupiqueur = Image.open("DeadTaupe.gif")
+    fen = Tk()
+    terre=Canvas(fen,width=1000, height=1000, bg="light blue")
+    terre.bind("<Button-1>",shoot)
+    terre.grid()
+    fen.title("Niveau Facile")
+    terre.create_image(
+    
+
+
+
+    #lancement des fonctions en parralelelel
+    thread_1.start()
+    thread_2.start()
+
+    #pour attendre que les functions se terminent
+    thread_1.join()
+    thread_2.join()        
+
+
+
+    
+
+
+
+Facile()
+
+
+
+
+
+
+
+
+
+
+
 
