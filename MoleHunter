@@ -1,197 +1,329 @@
-import tkinter 
+from tkinter import*
+from tkinter.messagebox import *
 import random
 import threading
 import time
 
+#Paramètres de la fenetre
+fen=Tk()
+fen.title('Tape Taupe')
 
-class Facile():
+#Les fonctions
 
-    def tpsrestant(): 
-        start = time.time()
-        if time.time() - start > 120:
-            findepartie()
-
-
-    def findepartie():
-        partie = 0
-        if score > bestscore1:
-            bestscore1 = score
-            pseudo1 = input()
-        fen.quit()
-        fen.destroy()
+def Lancement():
+    global startt
+    global score
+    global taupex
+    global taupey
+    global bestscore
+    startt = time.time()
+    score = 0
+    taupex=600
+    taupey=600
+    bs=open("bestscore.txt", "r")
+    bestscore= bs.readline(6)
+    bs.close()
+    sscore.insert(END,"Best:" +str(bestscore) +" Your Score:" +str(score))
+    Facile()
+    
+def shoot(coord):
+    global taupex
+    global taupey
+    global score
+    coordx=coord.x
+    coordy=coord.y
+    
+    
+    if coordx >= taupex -50 and coordx <= taupex + 50 and coordy >= taupey -50 and coordy <= taupey + 50:
+        print("shooootttt")                                                                                                #verifie si clique dans la hitbox
+        score +=  1
+        sscore.delete("0.0",END)  
+        sscore.insert(END,"        Best:" +str(bestscore) +"           Your Score:" +str(score))
         
-    def apparition():
-        while partie == 1:
-            time.sleep(random.randint(1, 500)/100 + 3)
-            position=random.randint(1, 9)
-            taupe(position)
+        fen1.after(1, clearshoot)
 
-    def taupe(position):
-        if position == 1 and disp1 == 0:
-            disp1 = 1
-            trou1()
-        else:
-            position = position +1
-            
-            
-        if position == 2 and disp2 == 0:
-            disp2 = 1
-            trou2()
-        else:
-            position = position +1
-            
-            
-        if position == 3 and disp3 == 0:
-            disp3 = 1
-            trou3()
-        else:
-            position = position +1
-            
-            
-        if position == 4 and disp4 == 0:
-            disp4 = 1
-            trou4()
-        else:
-            position = position +1
-            
-            
-        if position == 5 and disp5 == 0:
-            disp5 = 1
-            trou5()
-        else:
-            position = position +1
-            
-            
-        if position == 6 and disp6 == 0:
-            disp6 = 1
-            trou6()
-        else:
-            position = position +1
-            
-            
-        if position == 7 and disp7 == 0:
-            disp7 = 1
-            trou7()
-        else:
-            position = position +1
-            
-            
-        if position == 8 and disp8 == 0:
-            disp8 = 1
-            trou8()
-        else:
-            position = position +1
-            
-            
-        if position == 9 and disp9 == 0:
-            disp9 = 1
-            trou9()
-        else:
-            position = position +1
-            
-    def trou1():
-        trouu1 = terre.create_image(coord, image=Taupiqueur)
-        trouu1
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
+        
+def Facile():
+    
+    
+    global startt
+    global bestscore
+    global score
+    nexttaupe=random.randint(700,1500)
+    taupe= random.choice(taupelist)
+    fen1.after(nexttaupe, taupe)
 
-    def trou2():
-        trouu2 = terre.create_image(coord, image=Taupiqueur)
-        trouu2
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
+    if time.time() - startt > 35:
+        if str(score) > bestscore:
+            bss=open("bestscore.txt", "w")
+            bss.writelines(str(score))
+            bss.close()
+        fen1.quit()
+        fen1.destroy()
+        menuu.quit()
+        menuu.destroy()
 
-    def trou3():
-        trouu3 = terre.create_image(coord, image=Taupiqueur)
-        trouu3
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
+        
+def clearshoot():
+    global taupex
+    global taupey
+    taupex=600
+    taupey=600
+    terre.delete(ALL)
+    
+def clear():
+    global taupex
+    global taupey
+    taupex=600
+    taupey=600
+    terre.delete(ALL)
+    fen1.after(10, Facile)
 
-    def trou4():
-        trouu4 = terre.create_image(coord, image=Taupiqueur)
-        trouu4
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
-    def trou5():
-        trouu5 = terre.create_image(coord, image=Taupiqueur)
-        trouu5
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
-    def trou6():
-        trouu6 = terre.create_image(coord, image=Taupiqueur)
-        trouu6
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
-    def trou7():
-        trouu7 = terre.create_image(coord, image=Taupiqueur)
-        trouu7
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
-    def trou8():
-        trouu8 = terre.create_image(coord, image=Taupiqueur)
-        trouu8
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
-    def trou9():
-        trouu9 = terre.create_image(coord, image=Taupiqueur)
-        trouu9
-        time.sleep(random.randint(1, 500)/100 + 3)
-        terre.delete(trouu)
-
+def taupe1():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=100
+    taupey=100
+    terre.create_image(100,100, image=Taupiqueur)
+    fen1.after(700, clear)
     
 
-    def shoot(coord):
-        if coord.x <= taupex and coord.x >= taupex + taille de la taupe a definir and coord.y <= taupey and coord.y => taupey + taille de limage:
-#verifie si clique dans la hitbox
-            score = score + 1
-            supp la taupe
+def taupe2():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=250
+    taupey=100
+    terre.create_image(250,100, image=Taupiqueur)
+    fen1.after(700, clear)
+    
 
-    #preparation a la mise en parallèle de l'execution des fonctions
-    thread_1 = tpsrestant()
-    thread_2 = apparition()
+def taupe3():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=400
+    taupey=100
+    terre.create_image(400,100, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+def taupe4():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=100
+    taupey=250
+    terre.create_image(100,250, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+def taupe5():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=250
+    taupey=250
+    terre.create_image(250,250, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+def taupe6():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=400
+    taupey=250
+    terre.create_image(400,250, image=Taupiqueur)
+    fen1.after(700, clear)
+    
 
 
-    Taupiqueur = Image.open("Taupe.gif")
-    shootTaupiqueur = Image.open("DeadTaupe.gif")
-    fen = Tk()
-    terre=Canvas(fen,width=1000, height=1000, bg="light blue")
+def taupe7():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=100
+    taupey=400
+    terre.create_image(100,400, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+
+def taupe8():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=250
+    taupey=400
+    terre.create_image(250,400, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+def taupe9():
+    global Taupiqueur
+    global taupex
+    global taupey
+    taupex=400
+    taupey=400
+    terre.create_image(400,400, image=Taupiqueur)
+    fen1.after(700, clear)
+    
+
+def Niv1():
+    global fen1
+    global menuu
+    global menu
+    global terre
+    global bouton_jouer
+    global sscore
+
+    
+    menu=Canvas(menuu, width=300, height=200, bg="blue")
+    terre=Canvas(fen1,width=600, height=600, bg="#91977a")
     terre.bind("<Button-1>",shoot)
-    terre.grid()
-    fen.title("Niveau Facile")
-    terre.create_image(
-    
-
-
-
-    #lancement des fonctions en parralelelel
-    thread_1.start()
-    thread_2.start()
-
-    #pour attendre que les functions se terminent
-    thread_1.join()
-    thread_2.join()        
-
+    terre.pack()
+    menuu.title("Score")
+    fen1.title("Niveau Facile")
+    bouton_jouer = Button(menuu, text="Let's shoot them all", command=Lancement)
+    sscore=Text (menuu, height=1)
+    sscore.pack(side="top")
+    bouton_jouer.pack(side="top")
 
 
     
-
-
-
-Facile()
-
+    fen1.mainloop
 
 
 
 
 
 
+def quitter():
+    if askyesno('Tape Taupe', 'Êtes-vous sûr ?'):
+        global fen1
+        global menuu
+        showinfo('Tape Taupe', 'Aurevoir !')
+        fen.destroy()
+        fen1.destroy()
+        menuu.destroy()
+    else:
+        showinfo('Tape Taupe', 'Heureux que vous restiez !', )
+
+
+##def recupere():
+##    showinfo("Pseudo :", entry.get())
+##    pseudo=entry.get()
+        
+#def voirscores():
+#      fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/records.txt", "r")
+#      records=fich.read()
+#      l2 = Label(fen, text = records)
+#      print(records)
+
+#Pour empecher le changement de taille de la page
+##fen.resizable(width=False, height=False)
+
+###Pour l'icone de la page
+##fen.iconbitmap("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/taupiqueur.ico")
+
+###Pour l'écriture "choix des niveaux"
+##tex1=Label(fen,text="Entrez votre pseudo :")
+##tex1.grid(row=1, column=2)
+
+#Ajustement de la page
+canvas = Canvas(fen, width=250, height=100)
+canvas.grid(row=1, column=1)
+
+###Récupération des records
+##
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsfacile.txt", "r")
+##recordf=fich.read()
+##fich.close()
+##print(recordf)
+##
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsintermediaire.txt", "r")
+##recordi=fich.read()
+##fich.close()
+##print(recordi)
+##
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsdifficile.txt", "r")
+##recordd=fich.read()
+##fich.close()
+##print(recordd)
+
+
+    
+
+###Entry pour le pseudo
+##value = StringVar() 
+##entry = Entry(fen, textvariable=value)
+##entry.grid(row=2, column=2)
+##
+###Canvas pour les scores facile
+##l = LabelFrame(fen, text="HighScores Facile", padx=30, pady=30)
+##l.grid(row=4, column=3)
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsfacile.txt", "r")
+##recordsfacile=fich.read()
+##fich.close()
+## 
+##l2 = Label(l, padx=30, pady=30,text=recordsfacile, bg="ivory").grid(row=3, column=3)
+##l2.create_text(" ")
+###Canvas pour les scores intermediaire
+##
+##l = LabelFrame(fen, text="HighScores Intermediaire", padx=30, pady=30)
+##l.grid(row=5, column=3)
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsintermediaire.txt", "r")
+##recordsintermediaire=fich.read()
+##fich.close()
+## 
+##l2 = Label(l, padx=30, pady=30,text=recordsintermediaire, bg="ivory").grid(row=3, column=3)
+##
+###Canvas pour les scores difficile
+##
+##l = LabelFrame(fen, text="HighScores Difficile", padx=30, pady=30)
+##l.grid(row=6, column=3)
+##fich=open("C:/Users/lbedouet/Desktop/Eti/Terminale/ISN/Projet bac blanc/recordsdifficile.txt", "r")
+##recordsdifficile=fich.read()
+##fich.close()
+## 
+##l2 = Label(l, padx=30, pady=30,text=recordsdifficile, bg="ivory").grid(row=3, column=3)
+
+#Les differents boutons
+bouton2=Button(fen, text="Jouer", bg="green", command=Niv1)
+bouton2.grid(row=1, column=1)
+
+bouton1=Button(fen, text="Quitter", command=quitter, bg="black", fg="white")
+bouton1.grid(row=2, column=1)
+fen1 = Tk()
+menuu= Tk()
+Taupiqueur = PhotoImage(file="Taupe.gif", master=fen1)
+shootTaupiqueur = PhotoImage(file="DeadTaupe.gif", master=fen1)
+taupelist=[taupe1, taupe2, taupe3, taupe4, taupe5, taupe6, taupe7, taupe8, taupe9]
+fen.mainloop
 
 
 
+##bouton3=Button(fen, text="Niveau Intermediaire", bg="light blue")
+##bouton3.grid(row=5, column=2)
+##bouton4=Button(fen, text="Niveau Expert", bg="red")
+##bouton4.grid(row=6, column=2)
+##bouton6=Button(fen, text="Valider", command=recupere)
+##bouton6.grid(row=3, column=2)
+#bouton5=Button(fen, text="Scores", bg="light grey", command=voirscores)
+#bouton5.grid(row=1, column=3)
+#Tests
 
+#pour une boite de dialogue
+##value = StringVar()
+##value.set("")
+##entree = Entry(fen, textvariable=str, width=30)
+##entree.pack()
+##pseudo=entree
+
+#pour une échelle
+##value = DoubleVar()
+##scale = Scale(fen, variable=value)
+##scale.pack()
 
